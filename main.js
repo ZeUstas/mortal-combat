@@ -18,7 +18,7 @@ const player2 = {
   },
 };
 
-function createPlayer(playerNodeClassName, playerName, playerHitPoints) {
+function createPlayer(playerNodeClassName, playerObj) {
   const $player = document.createElement('div');
   $player.className = playerNodeClassName;
 
@@ -28,17 +28,17 @@ function createPlayer(playerNodeClassName, playerName, playerHitPoints) {
   const $life = document.createElement('div');
   $life.className = 'life';
   $life.style.width = '100%';
-  // $life.innerText = playerHitPoints;
+  // $life.innerText = playerObj.hp;
 
   const $name = document.createElement('div');
   $name.className = 'name';
-  $name.innerText = playerName;
+  $name.innerText = playerObj.name;
 
   const $character = document.createElement('div');
   $character.className = 'character';
 
   const $image = document.createElement('img');
-  $image.src = 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif';
+  $image.src = playerObj.img;
 
   document.querySelector('.arenas').appendChild($player);
 
@@ -51,5 +51,6 @@ function createPlayer(playerNodeClassName, playerName, playerHitPoints) {
   $character.appendChild($image);
 }
 
-createPlayer('player1', 'Scorpion', 50);
-createPlayer('player2', 'Sub-Zero', 80);
+createPlayer('player1', player1);
+createPlayer('player2', player2);
+
