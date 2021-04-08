@@ -27,8 +27,7 @@ function createPlayer(playerNodeClassName, playerObj) {
 
   const $life = document.createElement('div');
   $life.className = 'life';
-  $life.style.width = '100%';
-  // $life.innerText = playerObj.hp;
+  $life.style.width = playerObj.hp + '%';
 
   const $name = document.createElement('div');
   $name.className = 'name';
