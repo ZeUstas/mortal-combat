@@ -50,3 +50,6 @@ function createPlayer(playerNodeClassName, playerName, playerHitPoints) {
 
   $character.appendChild($image);
 }
+
+createPlayer('player1', 'Scorpion', 50);
+createPlayer('player2', 'Sub-Zero', 80);
