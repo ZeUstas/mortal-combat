@@ -1,12 +1,13 @@
 const $arenas = document.querySelector('.arenas');
+const $randomButton = document.querySelector('.button');
 
 const player1 = {
   playerNum: 1,
   name: 'Scorpion',
-  hp: 50,
+  hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
   weapon: ['Kunai', 'Axe', 'Long Sword', 'Ice Hammer'],
-  attack: function () {
+  attack: function() {
     console.log(this.name + 'Fight...');
   },
 };
@@ -14,7 +15,7 @@ const player1 = {
 const player2 = {
   playerNum: 2,
   name: 'Sub-Zero',
-  hp: 80,
+  hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
   weapon: ['Ice Scepter', 'Kori Blade', 'Ice Daggers', 'Ice Hammer'],
   attack: function () {
@@ -22,8 +23,21 @@ const player2 = {
   },
 };
 
+$randomButton.addEventListener('click', handleClickRandomButton);
+
+function handleClickRandomButton() {
+  const hitTurn = Math.floor(Math.random() * 10) <= 4 ? 0 : 1;
+  let player = (hitTurn === 0) ? player1 : player2;
+  // console.log ('hitTurn =  ' + hitTurn);
+  hitPlayer(player, -30);
+  if (player.hp === 0) {
+    player = (hitTurn === 0) ? player2 : player1;
+    showFightResult(player.name);
+  }
+}
+
 function createElement(tag, className) {
-  const $element = document.createElement(tag);;
+  const $element = document.createElement(tag);
   if (className) {
     $element.classList.add(className);
   }
@@ -54,4 +68,3 @@ function createPlayer(playerObj) {
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
-
