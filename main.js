@@ -54,6 +54,13 @@ function hitPlayer(playerObj, hitStrength) {
   $playerLife.style.width = playerObj.hp + '%';
 }
 
+function showFightResult(playerName) {
+  const $resultMessage = createElement('div', 'loseTitle');
+  $resultMessage.innerText = playerName + ' wins!';
+  $arenas.appendChild($resultMessage);
+  $randomButton.style.display = 'none';
+}
+
 function createElement(tag, className) {
   const $element = document.createElement(tag);
   if (className) {
