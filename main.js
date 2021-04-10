@@ -10,6 +10,12 @@ const player1 = {
   attack: function() {
     console.log(this.name + 'Fight...');
   },
+  changeHp: function(num) {
+    this.hp += num;
+    if (this.hp <= 0) {
+      this.hp = 0;
+    }
+  }
 };
 
 const player2 = {
@@ -21,6 +27,12 @@ const player2 = {
   attack: function () {
     console.log(this.name + 'Fight...');
   },
+  changeHp: function(num) {
+    this.hp += num;
+    if (this.hp <= 0) {
+      this.hp = 0;
+    }
+  }
 };
 
 $randomButton.addEventListener('click', handleClickRandomButton);
