@@ -48,6 +48,12 @@ function handleClickRandomButton() {
   }
 }
 
+function hitPlayer(playerObj, hitStrength) {
+  playerObj.changeHp(hitStrength);
+  const $playerLife = document.querySelector('.player' + playerObj.playerNum + ' .life');
+  $playerLife.style.width = playerObj.hp + '%';
+}
+
 function createElement(tag, className) {
   const $element = document.createElement(tag);
   if (className) {
