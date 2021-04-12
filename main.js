@@ -44,21 +44,24 @@ function renderHP() {
   this.elHp().style.width = this.hp + '%';
 }
 
-function handleClickRandomButton() {
+function randomButtonClickHandler() {
   const hitTurn = Math.floor(Math.random() * 10) <= 4 ? 0 : 1;
   let player = (hitTurn === 0) ? player1 : player2;
   // console.log ('hitTurn =  ' + hitTurn);
   hitPlayer(player, 30);
   if (player.hp === 0) {
-    player = (hitTurn === 0) ? player2 : player1;
+    player = getWinner(player);
     showFightResult(player.name);
   }
 }
 
 function hitPlayer(playerObj, hitStrength) {
   playerObj.changeHp(-hitStrength);
-  const $playerLife = document.querySelector('.player' + playerObj.playerNum + ' .life');
-  $playerLife.style.width = playerObj.hp + '%';
+  playerObj.renderHp();
+}
+
+function getWinner(playerObj) {
+  return playerObj === player1 ? player2 : player1;
 }
 
 function showFightResult(playerName) {
@@ -101,5 +104,5 @@ function createPlayer(playerObj) {
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
 
-$randomButton.addEventListener('click', handleClickRandomButton);
+$randomButton.addEventListener('click', randomButtonClickHandler);
 
