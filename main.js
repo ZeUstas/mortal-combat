@@ -7,15 +7,10 @@ const player1 = {
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
   weapon: ['Kunai', 'Axe', 'Long Sword', 'Ice Hammer'],
-  attack: function() {
-    console.log(this.name + 'Fight...');
-  },
-  changeHp: function(num) {
-    this.hp += num;
-    if (this.hp <= 0) {
-      this.hp = 0;
-    }
-  }
+  attack: launchAttack,
+  changeHp: changeHP,
+  elHp: elHP,
+  renderHp: renderHP
 };
 
 const player2 = {
@@ -24,24 +19,36 @@ const player2 = {
   hp: 100,
   img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
   weapon: ['Ice Scepter', 'Kori Blade', 'Ice Daggers', 'Ice Hammer'],
-  attack: function () {
-    console.log(this.name + 'Fight...');
-  },
-  changeHp: function(num) {
-    this.hp += num;
-    if (this.hp <= 0) {
-      this.hp = 0;
-    }
-  }
+  attack: launchAttack,
+  changeHp: changeHP,
+  elHp: elHP,
+  renderHp: renderHP
 };
 
-$randomButton.addEventListener('click', handleClickRandomButton);
+function launchAttack() {
+  console.log(this.name + 'Fight...');
+}
+
+function changeHP(num) {
+  this.hp += num;
+  if (this.hp < 0) {
+    this.hp = 0;
+  }
+}
+
+function elHP() {
+  return document.querySelector('.player' + this.playerNum + ' .life');
+}
+
+function renderHP() {
+  this.elHp().style.width = this.hp + '%';
+}
 
 function handleClickRandomButton() {
   const hitTurn = Math.floor(Math.random() * 10) <= 4 ? 0 : 1;
   let player = (hitTurn === 0) ? player1 : player2;
   // console.log ('hitTurn =  ' + hitTurn);
-  hitPlayer(player, -30);
+  hitPlayer(player, 30);
   if (player.hp === 0) {
     player = (hitTurn === 0) ? player2 : player1;
     showFightResult(player.name);
@@ -49,7 +56,7 @@ function handleClickRandomButton() {
 }
 
 function hitPlayer(playerObj, hitStrength) {
-  playerObj.changeHp(hitStrength);
+  playerObj.changeHp(-hitStrength);
   const $playerLife = document.querySelector('.player' + playerObj.playerNum + ' .life');
   $playerLife.style.width = playerObj.hp + '%';
 }
@@ -93,3 +100,6 @@ function createPlayer(playerObj) {
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
+
+$randomButton.addEventListener('click', handleClickRandomButton);
+
