@@ -1,5 +1,6 @@
 const $arenas = document.querySelector('.arenas');
 const $randomButton = document.querySelector('.button');
+const $reloadButton = createReloadButton('Restart');
 
 const player1 = {
   playerNum: 1,
@@ -52,6 +53,7 @@ function randomButtonClickHandler() {
   if (player.hp === 0) {
     player = getWinner(player);
     showFightResult(player.name);
+    showRestartButton();
   }
 }
 
@@ -69,6 +71,10 @@ function showFightResult(playerName) {
   $resultMessage.innerText = playerName + ' wins!';
   $arenas.appendChild($resultMessage);
   $randomButton.style.display = 'none';
+}
+
+function showRestartButton() {
+  $reloadButton.style.display = 'block';
 }
 
 function createElement(tag, className) {
@@ -101,8 +107,22 @@ function createPlayer(playerObj) {
   return $player;
 }
 
+function createReloadButton(buttonTitle) {
+  const $button = createElement('button', 'reloadWrap');
+  $button.style.display = 'none';
+  $button.innerText = buttonTitle;
+  return $button;
+}
+
+function reloadButtonClickHandler() {
+  window.location.reload();
+}
+
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
 
+$arenas.appendChild($reloadButton);
+
 $randomButton.addEventListener('click', randomButtonClickHandler);
+$reloadButton.addEventListener('click', reloadButtonClickHandler);
 
