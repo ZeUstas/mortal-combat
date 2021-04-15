@@ -69,8 +69,8 @@ $fightForm.addEventListener('submit', function (e) {
     Math.floor(fighter1Strike.hitValue / 2) : fighter1Strike.hitValue;
   player1.changeHp(-damage1);
   player2.changeHp(-damage2);
-  console.log(damage1, damage2);
-  console.log(player1.hp, player2.hp);
+  console.log('Damages:', damage1, damage2);
+  console.log('Hitpoints', player1.hp, player2.hp);
   player1.renderHp();
   player2.renderHp();
 
@@ -113,15 +113,6 @@ function fighter2Attack() {
 
 function getRandNum(min, max) {
   return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-function hitPlayer(playerObj, hitStrength) {
-  playerObj.changeHp(-hitStrength);
-  playerObj.renderHp();
-}
-
-function getWinner(playerObj) {
-  return playerObj === player1 ? player2 : player1;
 }
 
 function showFightResult(message) {
