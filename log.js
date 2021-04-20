@@ -75,10 +75,10 @@ export function getLogMessage(logType, player1Obj, player2Obj, damage) {
   }
 }
 
-export function showLogMessage(message) {
+export const showLogMessage = (message) => {
   $chat.insertAdjacentHTML('afterbegin', `<p>${message}</p>`);
 }
 
-export function lineFeed() {
+export const lineFeed = () => {
   $chat.insertAdjacentHTML('afterbegin', `<p style="color:yellow" >***</p>`);
 }

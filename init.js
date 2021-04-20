@@ -7,20 +7,7 @@ import {$fightForm} from '/fight-form.js';
 
 const $arenas = document.querySelector('.arenas');
 
-export function initGame() {
-  $arenas.appendChild(createPlayer(player1));
-  $arenas.appendChild(createPlayer(player2));
-  $arenas.appendChild($resultMessage);
-
-  $arenas.appendChild($reloadButtonDiv);
-  $reloadButtonDiv.appendChild($reloadButton);
-
-  showLogMessage(getLogMessage('start', player1, player2));
-  console.log(getLogMessage('start', player1, player2));
-  $fightForm.addEventListener('submit', startCombat);
-}
-
-function createPlayer(playerObj) {
+const createPlayer = (playerObj) => {
   const $player = createElement('div', `player${playerObj.indexNum}`);
   const $progressBar = createElement('div', 'progressbar');
   const $life = createElement('div', 'life');
@@ -39,5 +26,18 @@ function createPlayer(playerObj) {
   $character.appendChild($image);
 
   return $player;
+}
+
+export const initGame = () => {
+  $arenas.appendChild(createPlayer(player1));
+  $arenas.appendChild(createPlayer(player2));
+  $arenas.appendChild($resultMessage);
+
+  $arenas.appendChild($reloadButtonDiv);
+  $reloadButtonDiv.appendChild($reloadButton);
+
+  showLogMessage(getLogMessage('start', player1, player2));
+  console.log(getLogMessage('start', player1, player2));
+  $fightForm.addEventListener('submit', startCombat);
 }
 

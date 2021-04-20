@@ -63,7 +63,7 @@ export function startCombat(event) {
   showElement($reloadButton);
 };
 
-function fighter1Attack() {
+const fighter1Attack = () => {
   const hitTrg = hitTargets[getRandNum(0, hitTargets.length - 1)];
   const defenceTrg = hitTargets[getRandNum(0, hitTargets.length - 1)];
   return {
@@ -73,7 +73,7 @@ function fighter1Attack() {
   };
 }
 
-function fighter2Attack() {
+const fighter2Attack = () => {
   const strike = {};
   for (let item of $fightForm) {
     if (item.checked && item.name === 'hit') {
