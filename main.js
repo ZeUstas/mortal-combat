@@ -1,3 +1,3 @@
-import {initGame} from './controls.js';
+import {initGame} from './init.js';
 
 initGame();

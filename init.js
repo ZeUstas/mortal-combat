@@ -1,14 +1,11 @@
+import {createElement} from './lib.js';
 import {player1, player2} from './players.js';
 import {getLogMessage, showLogMessage} from './log.js';
-import {startCombat} from './combat.js';
-import {createElement} from './lib.js';
+import {startCombat} from './fight.js';
+import {$resultMessage, $reloadButtonDiv, $reloadButton} from './fight-result.js';
+import {$fightForm} from '/fight-form.js';
 
 const $arenas = document.querySelector('.arenas');
-export const $chat = document.querySelector('.chat');
-export const $fightForm = document.querySelector('.control');
-export const $resultMessage = createResultMessage();
-const $reloadButtonDiv = createElement('div', 'reloadWrap');
-export const $reloadButton = createReloadButton('Reload');
 
 export function initGame() {
   $arenas.appendChild(createPlayer(player1));
@@ -44,18 +41,3 @@ function createPlayer(playerObj) {
   return $player;
 }
 
-function createResultMessage() {
-  const $resMessage = createElement('div', 'winTitle');
-  $resMessage.style.display = 'none';
-  return $resMessage;
-}
-
-function createReloadButton(buttonTitle) {
-  const $button = createElement('button', 'button');
-  $button.style.display = 'none';
-  $button.innerText = buttonTitle;
-  $button.addEventListener('click', function () {
-    window.location.reload();
-  });
-  return $button;
-}

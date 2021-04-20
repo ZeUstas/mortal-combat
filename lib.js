@@ -14,3 +14,7 @@ export function createElement(tag, className) {
   return $element;
 }
 
+export function showElement(element) {
+  element.style.display = 'block';
+}
+

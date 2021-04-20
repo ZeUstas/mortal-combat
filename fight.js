@@ -1,7 +1,9 @@
-import {$fightForm, $resultMessage, $reloadButton} from './controls.js';
+import {showElement, getRandNum} from './lib.js';
 import {getLogMessage, showLogMessage, lineFeed} from './log.js';
 import {player1, player2} from './players.js';
-import {getRandNum} from './lib.js';
+import {showFightResult, $reloadButton} from './fight-result.js';
+import {$fightForm} from './fight-form.js';
+
 
 const hitMaxStrengths = {
   head: 30,
@@ -10,7 +12,6 @@ const hitMaxStrengths = {
 };
 const hitTargets = ['head', 'body', 'foot'];
 
-// $fightForm.addEventListener('submit', function (event) {
 export function startCombat(event) {
   event.preventDefault();
 
@@ -59,7 +60,7 @@ export function startCombat(event) {
 } else {
     return;
   }
-  showReloadButton();
+  showElement($reloadButton);
 };
 
 function fighter1Attack() {
@@ -85,18 +86,4 @@ function fighter2Attack() {
     item.checked = false;
   }
   return strike;
-}
-
-function showFightResult(message) {
-  $fightForm.style.display = 'none';
-  if (message === player1.name || message === player2.name) {
-    $resultMessage.innerText = `${message} wins!`;
-  } else {
-    $resultMessage.innerText = message;
-  }
-  $resultMessage.style.display = 'block';
-}
-
-function showReloadButton() {
-  $reloadButton.style.display = 'block';
 }

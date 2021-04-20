@@ -1,5 +1,6 @@
-import {$chat} from './controls.js';
 import {zeroPad, getRandNum} from './lib.js';
+
+const $chat = document.querySelector('.chat');
 
 const logs = {
   start: 'Часы показывали [time], когда [player1] и [player2] бросили вызов друг другу.',
