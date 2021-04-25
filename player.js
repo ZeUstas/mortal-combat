@@ -1,4 +1,4 @@
-export class Player {
+export default class Player {
   constructor(props) {
     this.indexNum = props.indexNum;
     this.name = props.name;

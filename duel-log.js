@@ -1,6 +1,6 @@
 import {zeroPad, getRandNum} from './lib.js';
 
-export class DuelLog {
+export default class DuelLog {
   $chat = document.querySelector('.chat');
 
   logs = {
@@ -51,19 +51,19 @@ export class DuelLog {
   
     switch (logType) {
       case 'start':
-        logText = logs[logType];
+        logText = this.logs[logType];
         logText = logText.replace('[time]', `${hours}:${minutes}`);
         logText = logText.replace('[player1]', objPlayer1.name);
         logText = logText.replace('[player2]', objPlayer2.name);
         return logText;
       case 'end':
-        logText = logs[logType][getRandNum(0, logs[logType].length -1)];
+        logText = this.logs[logType][getRandNum(0, this.logs[logType].length -1)];
         logText = logText.replace('[playerWins]', objPlayer1.name);
         logText = logText.replace('[playerLose]', objPlayer2.name);
         return logText;
       case 'hit':
       case 'defence':
-        logText = logs[logType][getRandNum(0, logs[logType].length -1)];
+        logText = this.logs[logType][getRandNum(0, this.logs[logType].length -1)];
         logText = logText.replace('[playerKick]', objPlayer1.name);
         logText = logText.replace('[playerDefence]', objPlayer2.name);
         logText = `${hours}:${minutes}:${seconds}` +
@@ -71,7 +71,7 @@ export class DuelLog {
                   ` -- ${objPlayer2.name}: ущерб ${damage}, осталось ${objPlayer2.hp} из 100.`;
         return logText;
       case 'draw':
-        return logs[logType];
+        return this.logs[logType];
     }
   }
   showMessage(message) {
