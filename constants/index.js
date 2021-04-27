@@ -1,8 +1,14 @@
-import {zeroPad, getRandNum} from './lib.js';
+export const hitMaxStrengths = {
+  head: 70,
+  body: 60,
+  foot: 50
+};
 
-const $chat = document.querySelector('.chat');
+export const hitTargets = ['head', 'body', 'foot'];
 
-const logs = {
+export const $chat = document.querySelector('.chat');
+
+export const logTemplates = {
   start: 'Часы показывали [time], когда [player1] и [player2] бросили вызов друг другу.',
   end: [
       'Результат удара [playerWins]: [playerLose] - труп',
@@ -41,44 +47,3 @@ const logs = {
   ],
   draw: 'Ничья - это тоже победа!'
 };
-
-export function getLogMessage(logType, player1Obj, player2Obj, damage) {
-  let logText;
-  const time = new Date();
-  const hours = zeroPad(time.getHours());
-  const minutes = zeroPad(time.getMinutes());
-  const seconds = zeroPad(time.getSeconds());
-
-  switch (logType) {
-    case 'start':
-      logText = logs[logType];
-      logText = logText.replace('[time]', `${hours}:${minutes}`);
-      logText = logText.replace('[player1]', player1Obj.name);
-      logText = logText.replace('[player2]', player2Obj.name);
-      return logText;
-    case 'end':
-      logText = logs[logType][getRandNum(0, logs[logType].length -1)];
-      logText = logText.replace('[playerWins]', player1Obj.name);
-      logText = logText.replace('[playerLose]', player2Obj.name);
-      return logText;
-    case 'hit':
-    case 'defence':
-      logText = logs[logType][getRandNum(0, logs[logType].length -1)];
-      logText = logText.replace('[playerKick]', player1Obj.name);
-      logText = logText.replace('[playerDefence]', player2Obj.name);
-      logText = `${hours}:${minutes}:${seconds}` +
-                ` -- ${logText}` +
-                ` -- ${player2Obj.name}: ущерб ${damage}, осталось ${player2Obj.hp} из 100.`;
-      return logText;
-    case 'draw':
-      return logs[logType];
-  }
-}
-
-export const showLogMessage = (message) => {
-  $chat.insertAdjacentHTML('afterbegin', `<p>${message}</p>`);
-}
-
-export const lineFeed = () => {
-  $chat.insertAdjacentHTML('afterbegin', `<p style="color:yellow" >***</p>`);
-}

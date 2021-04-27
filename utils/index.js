@@ -17,4 +17,3 @@ export function createElement(tag, className) {
 export function showElement(element) {
   element.style.display = 'block';
 }
-
