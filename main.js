@@ -1,11 +1,5 @@
-import { getRandNum, zeroPad, createElement, showElement } from './utils/index.js';
-import { hitMaxStrengths, hitTargets, logTemplates } from './constants/index.js';
 import { Player } from './Player/index.js';
 import { Game } from './Game/index.js';
-
-const $arenas = document.querySelector('.arenas');
-const $fightForm = document.querySelector('.control');
-const $chat = document.querySelector('.chat');
 
 const player1 = new Player({
   indexNum: 1,
