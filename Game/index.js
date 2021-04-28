@@ -111,7 +111,7 @@ export class Game {
     return attackData;
   }
 
-  controlDuel2 = (player1Obj, player2Obj) => async (event) => {
+  controlDuel = (player1Obj, player2Obj) => async (event) => {
     event.preventDefault();
 
     const intent = this.playerIntent();
@@ -131,7 +131,7 @@ export class Game {
       player2Hit.hitTarget = attackData.player2.hit;
       player2Hit.defenceTarget = attackData.player2.defence;
 
-      console.log('player-1:', player1Hit);
+      console.log('\nplayer-1:', player1Hit);
       console.log('player-2:', player2Hit);
 
       const damage1 =
@@ -181,88 +181,12 @@ export class Game {
     }
   }
 
-  player1Attack = () => {
-    const hitTrg = hitTargets[getRandNum(0, hitTargets.length - 1)];
-    const defenceTrg = hitTargets[getRandNum(0, hitTargets.length - 1)];
-    return {
-      hitTarget: hitTrg,
-      hitValue: getRandNum(1, hitMaxStrengths[hitTrg]),
-      defenceTarget: defenceTrg
-    };
-  }
-
-  player2Attack = () => {
-    const strike = {};
-    for (let item of this.$duelControlForm) {
-      if (item.checked && item.name === 'hit') {
-        strike.hitTarget = item.value;
-        strike.hitValue = getRandNum(1, hitMaxStrengths[item.value]);
-      }
-      if (item.checked && item.name === 'defence') {
-        strike.defenceTarget = item.value;
-      }
-      // item.checked = false;
-    }
-    return strike;
-  }
-
-  controlDuel = (player1Obj, player2Obj) => (event) => {
-    event.preventDefault();
-  
-    const player1Hit = this.player1Attack();
-    console.log('##### player1Hit', player1Hit);
-  
-    const player2Hit = this.player2Attack();
-    console.log('##### player2Hit', player2Hit);
-  
-    const damage1 =
-      (player1Hit.defenceTarget === player2Hit.hitTarget) ? 0 : player2Hit.hitValue;
-    const damage2 =
-      (player2Hit.defenceTarget === player1Hit.hitTarget) ? 0 : player1Hit.hitValue;
-  
-    console.log(`Damages: ${damage1}, ${damage2}`);
-  
-    this.logSpacer();
-  
-    if (damage1 !== 0) {
-      player1Obj.changeHp(-damage1);
-      player1Obj.renderHp();
-      this.showLogMessage(this.getLogMessage('hit', player2Obj, player1Obj, damage1));
-    } else {
-      this.showLogMessage(this.getLogMessage('defence', player2Obj, player1Obj, 0));
-    }
-    if (damage2 !== 0) {
-      player2Obj.changeHp(-damage2);
-      player2Obj.renderHp();
-      this.showLogMessage(this.getLogMessage('hit', player1Obj, player2Obj, damage2));
-    } else {
-      this.showLogMessage(this.getLogMessage('defence', player1Obj, player2Obj, 0));
-    }
-  
-    if (player1Obj.hp === 0 && player2Obj.hp > 0) {
-      this.showFightResult(player2Obj.name);
-      this.logSpacer();
-      this.showLogMessage(this.getLogMessage('end', player2Obj, player1Obj));
-    } else if (player2Obj.hp === 0 && player1Obj.hp > 0) {
-      this.showFightResult(player1Obj.name);
-      this.logSpacer();
-      this.showLogMessage(this.getLogMessage('end', player1Obj, player2Obj));
-  } else if (player1Obj.hp === 0 && player2Obj.hp === 0) {
-    this.showFightResult('Draw');
-      this.logSpacer();
-      this.showLogMessage(this.getLogMessage('draw'));
-  } else {
-      return;
-    }
-    this.showReloadButton();
-  };
-
   initStage = (player1Obj, player2Obj) => {
     // player1.enterArena();
     // player2.enterArena();
   
     this.showLogMessage(this.getLogMessage('start', player1Obj, player2Obj));
   
-    this.$duelControlForm.addEventListener('submit', this.controlDuel2(player1Obj, player2Obj));
+    this.$duelControlForm.addEventListener('submit', this.controlDuel(player1Obj, player2Obj));
   }
 }
