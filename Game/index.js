@@ -4,7 +4,7 @@ import { hitMaxStrengths, hitTargets, logTemplates } from '../constants/index.js
 export class Game {
   constructor({arenaTagClass, controlTagClass, logTagClass}) {
     this.$arenas = document.querySelector(arenaTagClass);
-    this.$fightForm = document.querySelector(controlTagClass);
+    this.$duelControlForm = document.querySelector(controlTagClass);
     this.$chat = document.querySelector(logTagClass);
   }
 
@@ -56,7 +56,7 @@ export class Game {
   }
 
   showFightResult = (message) => {
-    this.$fightForm.style.display = 'none';
+    this.$duelControlForm.style.display = 'none';
     const $resultMessage = this.createResultMessage();
     this.$arenas.appendChild($resultMessage);
     if (message === 'Draw') {
@@ -149,7 +149,7 @@ export class Game {
 
   player2Attack = () => {
     const strike = {};
-    for (let item of this.$fightForm) {
+    for (let item of this.$duelControlForm) {
       if (item.checked && item.name === 'hit') {
         strike.hitTarget = item.value;
         strike.hitValue = getRandNum(1, hitMaxStrengths[item.value]);
@@ -168,6 +168,6 @@ export class Game {
   
     this.showLogMessage(this.getLogMessage('start', player1Obj, player2Obj));
   
-    this.$fightForm.addEventListener('submit', this.controlDuel(player1Obj, player2Obj));
+    this.$duelControlForm.addEventListener('submit', this.controlDuel(player1Obj, player2Obj));
   }
 }
