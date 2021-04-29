@@ -6,8 +6,8 @@ export class Player {
     this.hp = props.hp;
     this.img = props.img;
     this.indexNum = props.indexNum;
-    this.selector = `player${this.indexNum}`;
     this.rootSelector = props.rootSelector;
+    this.selector = `player${this.indexNum}`;
   }
 
   changeHp = (num) => {
