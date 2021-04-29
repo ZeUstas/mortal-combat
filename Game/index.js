@@ -92,7 +92,7 @@ export class Game {
     $button.style.display = 'none';
     $button.innerText = buttonTitle;
     $button.addEventListener('click', function () {
-      window.location.reload();
+      window.location.pathname = 'index.html';
     });
     return $button;
   };
@@ -265,12 +265,30 @@ export class Game {
     return player;
   };
 
-  createChosenPlayer = () => {
+  _createChosenPlayer = () => {
     const player = new Player({
       indexNum: 1,
       name: 'Sub-Zero',
       hp: 100,
       img: 'http://reactmarathon-api.herokuapp.com/assets/subzero.gif',
+      rootSelector: 'arenas',
+    });
+    return player;
+  };
+
+  getStoredPlayer = () => {
+    return JSON.parse(localStorage.getItem('player1'));
+  };
+
+  createChosenPlayer = () => {
+    let playerData;
+    let player;
+
+    playerData = this.getStoredPlayer();
+
+    player = new Player({
+      ...playerData,
+      indexNum: 1,
       rootSelector: 'arenas',
     });
     return player;
